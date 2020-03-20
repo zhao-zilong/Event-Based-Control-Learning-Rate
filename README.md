@@ -1,5 +1,5 @@
 # Exponentional/Proportional Derivative (E/PD) and Double Event-Based E/PD learning rate algorithms
-Code for paper [Feedback Control for Online Training of Neural Networks](https://ieeexplore.ieee.org/document/8920662) and [Event-Based Control for Online Training of Neural Networks](https://ieeexplore.ieee.org/document/9042857) 
+Code for paper [Feedback Control for Online Training of Neural Networks](https://hal.archives-ouvertes.fr/hal-02115916v2/document) and [Event-Based Control for Online Training of Neural Networks](https://ieeexplore.ieee.org/document/9042857) 
 which published in *2019 IEEE Conference on Control Technology and Applications (CCTA)* and *The IEEE Control Systems Letters*.
 
 The basic code structure is designed for google cloud ML-engine platform, the code is based on Python 3.5, Tenserflow and Keras.
