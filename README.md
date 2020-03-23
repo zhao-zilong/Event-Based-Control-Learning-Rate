@@ -35,7 +35,7 @@ from .EPD import LossLearningRateScheduler
 from .EventBasedLE import EventBasedLearningEpochStopper
 ```
 
-As our algorithms are all based on SGD, so the optimizer must be defined as:
+As our algorithms are all based on SGD, so the optimizer must be defined as (value of parameter `lr` here does not matter, because we will adjust its value before the training, setting by our algorithm):
 ```
 optimizer = SGD(lr=0.01, decay=0, momentum=0)
 ```
