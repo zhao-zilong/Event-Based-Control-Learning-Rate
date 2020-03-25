@@ -60,7 +60,7 @@ def main(job_dir,**args):
                   metrics=['acc'])
     h  =   model.fit_generator(datagen.flow(X_clean_iteration, y_clean_iteration, batch_size=batch_size),
                     steps_per_epoch=X_clean_iteration.shape[0]//batch_size, epochs=epochs_training,
-                    validation_data=(X_test, y_test), callbacks = [LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5, eventbasedLR = True), EventBasedLearningEpochStopper(alpha_threshold = -0.001, loss_zero = 0, lookbackward_epoch = 5, accumulated_epoch = 0, limit_epoch = total_epoch_training, ending_epoch = 10)]
+                    validation_data=(X_test, y_test), callbacks = [LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5, loss_zero = 0, eventbasedLR = True), EventBasedLearningEpochStopper(alpha_threshold = -0.001, loss_zero = 0, lookbackward_epoch = 5, accumulated_epoch = 0, limit_epoch = total_epoch_training, ending_epoch = 10)]
                     )
     round = 0
     turn = 1
@@ -84,7 +84,7 @@ def main(job_dir,**args):
                           metrics=['acc'])
             h_training_epoch  =   model.fit_generator(datagen.flow(X_clean_iteration, y_clean_iteration, batch_size=batch_size),
                             steps_per_epoch=X_clean_iteration.shape[0]//batch_size, epochs=epochs_training,
-                            validation_data=(X_test, y_test), callbacks = [LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5, eventbasedLR = True), EventBasedLearningEpochStopper(alpha_threshold = -0.001, loss_zero = 0, lookbackward_epoch = 5, accumulated_epoch = len(h.history['loss']), limit_epoch = total_epoch_training, ending_epoch = 10)]
+                            validation_data=(X_test, y_test), callbacks = [LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5, loss_zero = h.history['loss'][0], eventbasedLR = True), EventBasedLearningEpochStopper(alpha_threshold = -0.001, loss_zero = h.history['loss'][0], lookbackward_epoch = 5, accumulated_epoch = len(h.history['loss']), limit_epoch = total_epoch_training, ending_epoch = 10)]
                             )
             h  = combine_result(h, h_training_epoch)
 

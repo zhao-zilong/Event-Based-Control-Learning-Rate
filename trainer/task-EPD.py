@@ -57,7 +57,7 @@ def main(job_dir,**args):
                   metrics=['acc'])
     h  =   model.fit_generator(datagen.flow(X_clean_iteration, y_clean_iteration, batch_size=batch_size),
                     steps_per_epoch=X_clean_iteration.shape[0]//batch_size, epochs=epochs_training,
-                    validation_data=(X_test, y_test), callbacks = [History(), LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5)]
+                    validation_data=(X_test, y_test), callbacks = [History(), LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5, loss_zero = 0)]
                     )
 
     for i in np.arange(1, steps):
@@ -75,7 +75,7 @@ def main(job_dir,**args):
                       metrics=['acc'])
         h_training_epoch  =   model.fit_generator(datagen.flow(X_clean_iteration, y_clean_iteration, batch_size=batch_size),
                         steps_per_epoch=X_clean_iteration.shape[0]//batch_size, epochs=epochs_training,
-                        validation_data=(X_test, y_test), callbacks = [History(), LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5)]
+                        validation_data=(X_test, y_test), callbacks = [History(), LossLearningRateScheduler(base_lr = 0.01, kd_coef = 5, loss_zero = h.history['loss'][0])]
                         )
         h  = combine_result(h, h_training_epoch)
 

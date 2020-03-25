@@ -13,14 +13,14 @@ class LossLearningRateScheduler(keras.callbacks.History):
     loss_type: by default, training loss is used, if one wants to use testing loss: loss_type = 'val_loss'
     """
 
-    def __init__(self, base_lr = 0.01, kd_coef = 5.0, eventbasedLR = False, loss_type = 'loss'):
+    def __init__(self, base_lr = 0.01, kd_coef = 5.0, loss_zero = 0, eventbasedLR = False, loss_type = 'loss'):
 
         super(LossLearningRateScheduler, self).__init__()
 
         self.base_lr = base_lr
         self.kd_coef = kd_coef
         self.loss_type = loss_type
-        self.loss_zero = 0
+        self.loss_zero = loss_zero
         self.tipping_point = False
         self.last_lr = base_lr
         self.kp = 0.0
@@ -31,7 +31,7 @@ class LossLearningRateScheduler(keras.callbacks.History):
     def on_epoch_begin(self, epoch, logs=None):
         if len(self.epoch) > 1:
             print(self.history[self.loss_type])
-        if len(self.epoch) == 1:
+        if len(self.epoch) == 1 and self.loss_zero == 0:
             self.loss_zero = self.history[self.loss_type][0]
 
         if len(self.epoch) > 1 and not self.tipping_point:
